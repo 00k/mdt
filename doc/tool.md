@@ -1,15 +1,20 @@
 MDT-TOOL
 ====
+Copyright 2015, Baidu, Inc.
+
 #简介
   mdt-tool用于trace系统的管理、查询
 
 #特性
-  mdt将日志数据抽象为一个类SQL的简化表格模型，拥有database、table、colume等概念。
- * database表示业务的产品线，用于不同产品线之间的隔离以及quota管理，例如在线音乐、线上购物属于不同的产品线。
- * table表示一个产品线内的不同系统，便于隔离不同系统间的日志数据，例如线上购物的卖家系统和买家系统可能是两个独立的系统。
- * column表示可被检索的日志字段，例如user_id、query_id等等。
-  mdt支持常见的数据类型，如字符串、各种字长的整型等，方便用户构造检索条件。对于整型，支持大于、小于等比较语义。例如检索处理时间在5-6ms之间的trace，可以用cost_time>=5 and cost_time<=6表达。
-  mdt支持组合条件检索。例如检索用户id是888且商品id是123的trace，可以用user_id=888 and product_id=123表达。
+ * mdt将日志数据抽象为一个类SQL的简化表格模型，拥有database、table、colume等概念。
+
+  database表示业务的产品线，用于不同产品线之间的隔离以及quota管理，例如在线音乐、线上购物属于不同的产品线。
+
+  table表示一个产品线内的不同系统，便于隔离不同系统间的日志数据，例如线上购物的卖家系统和买家系统可能是两个独立的系统。
+
+  column表示可被检索的日志字段，例如user_id、query_id等等。
+ * mdt支持常见的数据类型，如字符串、各种字长的整型等，方便用户构造检索条件。对于整型，支持大于、小于等比较语义。例如检索处理时间在5-6ms之间的trace，可以用cost_time>=5 and cost_time<=6表达。
+ * mdt支持组合条件检索。例如检索用户id是888且商品id是123的trace，可以用user_id=888 and product_id=123表达。
   
 #用法
 ```
@@ -59,16 +64,16 @@ MDT-TOOL
 查询2015年10月15日14点之后，trace_id为110000000000A400，且RPC名称为“search”的日志，最多100条：
 
 ```
->> get 20151015-140000 100 trace_id=110000000000A400  span_name=search
+>> get 20151015-140000 100 trace_id=110000000000A400 span_name=search
 << 1 results match your query:
 
 << I1015 14:35:50.221328 9226 main.cc:168] MDT trace_id=110000000000A400 span_id=8000000000000112 parent_id=7000000000005901 span_name=search cost_time=2 qid=220000000000FF90 user=6600000000007000 query=zip
 ```
 
-查询service_name为nginx，且cost_time大于3的日志，最多1条
+查询service_name为storage，且cost_time大于3的日志，最多1条
 
 ```
->> get 1 service_name=nginx cost_time>3
+>> get 1 service_name=storage cost_time>3
 << 1 results match your query:
 
 << I1015 14:35:50.221418 9226 main.cc:168] MDT trace_id=1100000000003128 span_id=8000000000002760 parent_id=7000000000007BDE span_name=search cost_time=4 qid=220000000000FE12 user=660000000000EE20 query=casio mem_used 6.76M net_rx 44K io_r 65K
