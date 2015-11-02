@@ -42,7 +42,7 @@ Copyright 2015, Baidu, Inc.
 
 ##示例
 
-创建表格，表名是my_table，有四个可检索字段：query的类型是字符串，qid和user的类型是uint64，cost_time的类似是int32
+创建表格，表名是my_table，有四个可检索字段：query的类型是字符串，qid和user的类型是uint64，cost_time的类型是int32
 
 ```
 ./mdt
