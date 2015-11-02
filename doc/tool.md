@@ -3,7 +3,7 @@ MDT-TOOL
 Copyright 2015, Baidu, Inc.
 
 #简介
-  mdt-tool用于trace系统的管理、查询
+  mdt-tool用于日志数据的管理、查询
 
 #特性
  * mdt将日志数据抽象为一个类SQL的简化表格模型，拥有database、table、colume等概念。
@@ -13,8 +13,16 @@ Copyright 2015, Baidu, Inc.
   table表示一个产品线内的不同系统，便于隔离不同系统间的日志数据，例如线上购物的卖家系统和买家系统可能是两个独立的系统。
 
   column表示可被检索的日志字段，例如user_id、query_id等等。
- * mdt支持常见的数据类型，如字符串、各种字长的整型等，方便用户构造检索条件。对于整型，支持大于、小于等比较语义。例如检索处理时间在5-6ms之间的trace，可以用cost_time>=5 and cost_time<=6表达。
- * mdt支持组合条件检索。例如检索用户id是888且商品id是123的trace，可以用user_id=888 and product_id=123表达。
+  
+ * mdt支持常见的数据类型，如字符串、各种字长的整型等，方便用户构造检索条件。对于整型，支持大于、小于等比较语义。
+
+  例如检索处理时间在5-6ms之间的trace，可以用cost_time>=5 and cost_time<=6表达。
+  
+  支持的数据类型有字符串（bytes）、布尔（bool）、有符号整形（int8、int16、int32、int64）、无符号整形（uint8、uint16、uint32、uint64）、浮点数（float、double）
+  
+ * mdt支持组合条件检索。
+
+   例如检索用户id是888且商品id是123的trace，可以用user_id=888 and product_id=123表达。
   
 #用法
 ```
