@@ -2,29 +2,31 @@ MDT-TOOL
 ====
 Copyright 2015, Baidu, Inc.
 
-#简介
+##简介
+
   mdt-tool用于日志数据的管理、查询
 
-#特性
+##特性
+
  * mdt将日志数据抽象为一个类SQL的简化表格模型，拥有database、table、colume等概念。
 
-  database表示业务的产品线，用于不同产品线之间的隔离以及quota管理，例如在线音乐、线上购物属于不同的产品线。
+  * database表示业务的产品线，用于不同产品线之间的隔离以及quota管理，例如在线音乐、线上购物属于不同的产品线。
 
-  table表示一个产品线内的不同系统，便于隔离不同系统间的日志数据，例如线上购物的卖家系统和买家系统可能是两个独立的系统。
+  * table表示一个产品线内的不同系统，便于隔离不同系统间的日志数据，例如线上购物的卖家系统和买家系统可能是两个独立的系统。
 
-  column表示可被检索的日志字段，例如user_id、query_id等等。
+  * column表示可被检索的日志字段，例如user_id、query_id等等。
   
  * mdt支持常见的数据类型，如字符串、各种字长的整型等，方便用户构造检索条件。对于整型，支持大于、小于等比较语义。
 
-  例如检索处理时间在5-6ms之间的trace，可以用cost_time>=5 and cost_time<=6表达。
+  * 例如检索处理时间在5-6ms之间的trace，可以用cost_time>=5 and cost_time<=6表达。
   
-  支持的数据类型有字符串（bytes）、布尔（bool）、有符号整形（int8、int16、int32、int64）、无符号整形（uint8、uint16、uint32、uint64）、浮点数（float、double）
+  * 支持的数据类型有字符串（bytes）、布尔（bool）、有符号整形（int8、int16、int32、int64）、无符号整形（uint8、uint16、uint32、uint64）、浮点数（float、double）
   
  * mdt支持组合条件检索。
 
-   例如检索用户id是888且商品id是123的trace，可以用user_id=888 and product_id=123表达。
+  * 例如检索用户id是888且商品id是123的trace，可以用user_id=888 and product_id=123表达。
   
-#用法
+##用法
 ```
 ./mdt
 >> help
@@ -33,12 +35,12 @@ Copyright 2015, Baidu, Inc.
 << create table <table_name> {index_name index_type}
 << get [start_timestamp] [end_timestamp] [limit] {index_name comparator(=, >=, >, <=, <) index_value}
 ```
- * open database：打开产品线，不存在时会创建
- * open table：打开产品线下的某系统
- * create table：创建表格，设置用于检索的日志字段和类型
- * get：检索日志。start_timestamp和end_timestamp限定日志时间，limit限定结果数量，检索表达式由多个检索条件组成，用空格分开，语义为“且”
+  * open database：打开产品线，不存在时会创建
+  * open table：打开产品线下的某系统
+  * create table：创建表格，设置用于检索的日志字段和类型
+  * get：检索日志。start_timestamp和end_timestamp限定日志时间，limit限定结果数量，检索表达式由多个检索条件组成，用空格分开，语义为“且”
 
-#示例
+##示例
 
 创建表格，表名是my_table，有四个可检索字段：query的类型是字符串，qid和user的类型是uint64，cost_time的类似是int32
 
